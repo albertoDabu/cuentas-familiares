@@ -1,6 +1,6 @@
 <script>
   import "../app.css";
-  import { feedback } from "$lib/store.svelte.js";
+  import { feedback, dbActions } from "$lib/store.svelte.js";
   import { page } from "$app/stores";
   import { authState, authActions } from "$lib/auth.svelte.js";
   import { onMount } from "svelte";
@@ -21,8 +21,12 @@
       const isAuthRoute = authRoutes.includes($page.url.pathname);
       if (!authState.user && !isAuthRoute) {
         goto("/login");
+        dbActions.clearData();
       } else if (authState.user && isAuthRoute) {
         goto("/");
+        dbActions.refreshData();
+      } else if (authState.user) {
+        dbActions.refreshData();
       }
     }
   });

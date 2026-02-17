@@ -15,11 +15,23 @@ export const dbStore = writable(initialData);
 async function refreshData() {
   if (!authState.user) return;
 
+  console.log("Cargando datos para el usuario:", authState.user.id);
+
   const [catRes, subRes, regRes] = await Promise.all([
     supabase.from('categorias').select('*'),
     supabase.from('subcategorias').select('*'),
     supabase.from('registros').select('*')
   ]);
+
+  if (catRes.error) console.error("Error cargando categorías:", catRes.error);
+  if (subRes.error) console.error("Error cargando subcategorías:", subRes.error);
+  if (regRes.error) console.error("Error cargando registros:", regRes.error);
+
+  console.log("Datos recibidos:", { 
+    cats: catRes.data?.length, 
+    subs: subRes.data?.length, 
+    regs: regRes.data?.length 
+  });
 
   dbStore.set({
     categorias: (catRes.data || []).map(c => ({
@@ -54,14 +66,7 @@ export function triggerSavedFeedback() {
   }, 2000);
 }
 
-// Escuchar cambios de autenticación para cargar datos
-$effect.root(() => {
-  if (authState.user && !authState.loading) {
-    refreshData();
-  } else if (!authState.user && !authState.loading) {
-    dbStore.set(initialData);
-  }
-});
+
 
 // Derived stores for easier access
 export const categorias = derived(dbStore, ($db) => $db.categorias);
@@ -216,5 +221,11 @@ export const dbActions = {
       }));
       triggerSavedFeedback();
     }
+  },
+
+  refreshData,
+
+  clearData: () => {
+    dbStore.set(initialData);
   }
 };
