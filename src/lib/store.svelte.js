@@ -1,0 +1,220 @@
+import { writable, derived } from 'svelte/store';
+import { supabase } from './supabaseClient';
+import { authState } from './auth.svelte.js';
+
+// Estado inicial vacío
+const initialData = {
+  categorias: [],
+  subcategorias: [],
+  registros: []
+};
+
+export const dbStore = writable(initialData);
+
+// Cargador de datos desde Supabase
+async function refreshData() {
+  if (!authState.user) return;
+
+  const [catRes, subRes, regRes] = await Promise.all([
+    supabase.from('categorias').select('*'),
+    supabase.from('subcategorias').select('*'),
+    supabase.from('registros').select('*')
+  ]);
+
+  dbStore.set({
+    categorias: (catRes.data || []).map(c => ({
+      id: c.id,
+      nombre: c.nombre,
+      grupoId: c.grupo_id
+    })),
+    subcategorias: (subRes.data || []).map(s => ({
+      id: s.id,
+      nombre: s.nombre,
+      categoriaId: s.categoria_id
+    })),
+    registros: (regRes.data || []).map(r => ({
+      id: r.id,
+      mes: r.mes,
+      subcategoriaId: r.subcategoria_id,
+      concepto: r.concepto,
+      importe: Number(r.importe),
+      fecha: r.fecha,
+      comentarios: r.comentarios
+    }))
+  });
+}
+
+// Feedback Store
+export const feedback = writable({ saved: false });
+
+export function triggerSavedFeedback() {
+  feedback.set({ saved: true });
+  setTimeout(() => {
+    feedback.set({ saved: false });
+  }, 2000);
+}
+
+// Escuchar cambios de autenticación para cargar datos
+$effect.root(() => {
+  if (authState.user && !authState.loading) {
+    refreshData();
+  } else if (!authState.user && !authState.loading) {
+    dbStore.set(initialData);
+  }
+});
+
+// Derived stores for easier access
+export const categorias = derived(dbStore, ($db) => $db.categorias);
+export const subcategorias = derived(dbStore, ($db) => $db.subcategorias);
+export const registros = derived(dbStore, ($db) => $db.registros);
+
+// Actions
+export const dbActions = {
+  addCategoria: async (nombre, grupoId) => {
+    const { data, error } = await supabase
+      .from('categorias')
+      .insert([{ nombre, grupo_id: grupoId }])
+      .select();
+    
+    if (!error) {
+      const newCat = { id: data[0].id, nombre: data[0].nombre, grupoId: data[0].grupo_id };
+      dbStore.update(db => ({ ...db, categorias: [...db.categorias, newCat] }));
+      triggerSavedFeedback();
+    }
+  },
+
+  updateCategoria: async (id, nombre) => {
+    const { error } = await supabase
+      .from('categorias')
+      .update({ nombre })
+      .eq('id', id);
+    
+    if (!error) {
+      dbStore.update(db => ({
+        ...db,
+        categorias: db.categorias.map(c => c.id === id ? { ...c, nombre } : c)
+      }));
+      triggerSavedFeedback();
+    }
+  },
+
+  deleteCategoria: async (id) => {
+    const { error } = await supabase.from('categorias').delete().eq('id', id);
+    if (!error) {
+      dbStore.update(db => {
+        const subIdsForCat = db.subcategorias.filter(s => s.categoriaId === id).map(s => s.id);
+        return {
+          ...db,
+          categorias: db.categorias.filter(c => c.id !== id),
+          subcategorias: db.subcategorias.filter(s => s.categoriaId !== id),
+          registros: db.registros.filter(r => !subIdsForCat.includes(r.subcategoriaId))
+        };
+      });
+      triggerSavedFeedback();
+    }
+  },
+
+  addSubcategoria: async (nombre, categoriaId) => {
+    const { data, error } = await supabase
+      .from('subcategorias')
+      .insert([{ nombre, categoria_id: categoriaId }])
+      .select();
+    
+    if (!error) {
+      const newSub = { id: data[0].id, nombre: data[0].nombre, categoriaId: data[0].categoria_id };
+      dbStore.update(db => ({ ...db, subcategorias: [...db.subcategorias, newSub] }));
+      triggerSavedFeedback();
+    }
+  },
+
+  updateSubcategoria: async (id, nombre) => {
+    const { error } = await supabase
+      .from('subcategorias')
+      .update({ nombre })
+      .eq('id', id);
+    
+    if (!error) {
+      dbStore.update(db => ({
+        ...db,
+        subcategorias: db.subcategorias.map(s => s.id === id ? { ...s, nombre } : s)
+      }));
+      triggerSavedFeedback();
+    }
+  },
+
+  deleteSubcategoria: async (id) => {
+    const { error } = await supabase.from('subcategorias').delete().eq('id', id);
+    if (!error) {
+      dbStore.update(db => ({
+        ...db,
+        subcategorias: db.subcategorias.filter(s => s.id !== id),
+        registros: db.registros.filter(r => r.subcategoriaId !== id)
+      }));
+      triggerSavedFeedback();
+    }
+  },
+
+  addRegistro: async (mes, subcategoriaId, concepto, importe, fecha, comentarios) => {
+    const { data, error } = await supabase
+      .from('registros')
+      .insert([{ 
+        mes, 
+        subcategoria_id: subcategoriaId, 
+        concepto, 
+        importe, 
+        fecha, 
+        comentarios 
+      }])
+      .select();
+    
+    if (!error) {
+      const r = data[0];
+      const newReg = {
+        id: r.id,
+        mes: r.mes,
+        subcategoriaId: r.subcategoria_id,
+        concepto: r.concepto,
+        importe: Number(r.importe),
+        fecha: r.fecha,
+        comentarios: r.comentarios
+      };
+      dbStore.update(db => ({ ...db, registros: [...db.registros, newReg] }));
+      triggerSavedFeedback();
+    }
+  },
+
+  updateRegistro: async (id, mes, subcategoriaId, concepto, importe, fecha, comentarios) => {
+    const { error } = await supabase
+      .from('registros')
+      .update({ 
+        mes, 
+        subcategoria_id: subcategoriaId, 
+        concepto, 
+        importe, 
+        fecha, 
+        comentarios 
+      })
+      .eq('id', id);
+    
+    if (!error) {
+      dbStore.update(db => ({
+        ...db,
+        registros: db.registros.map(r => r.id === id ? { 
+          ...r, mes, subcategoriaId, concepto, importe, fecha, comentarios 
+        } : r)
+      }));
+      triggerSavedFeedback();
+    }
+  },
+
+  deleteRegistro: async (id) => {
+    const { error } = await supabase.from('registros').delete().eq('id', id);
+    if (!error) {
+      dbStore.update(db => ({
+        ...db,
+        registros: db.registros.filter(r => r.id !== id)
+      }));
+      triggerSavedFeedback();
+    }
+  }
+};
