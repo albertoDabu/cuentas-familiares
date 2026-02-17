@@ -432,7 +432,7 @@
               ? "Ingresos"
               : "Gastos"}
           </p>
-          <h2 class="text-7xl font-black text-slate-800 tracking-tighter">
+          <h2 class="text-4xl font-black text-slate-800 tracking-tight">
             {currentCategoria?.nombre || "Categoría"}
           </h2>
         </div>
