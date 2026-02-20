@@ -112,7 +112,7 @@
               <tr class="bg-green-50/50">
                 <td
                   colspan="14"
-                  class="sticky left-0 z-10 bg-green-50 px-4 sm:px-8 py-2 text-[11px] sm:text-xs font-black text-green-700 uppercase tracking-widest border-r border-green-100 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-green-50 px-4 sm:px-8 py-2 text-[11px] sm:text-xs font-black text-green-700 uppercase tracking-widest border-r border-[#e2e8f0] sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Ingresos</td
                 >
               </tr>
@@ -172,7 +172,7 @@
               {/each}
               <tr class="bg-green-100/30 font-black border-b border-green-200">
                 <td
-                  class="sticky left-0 z-10 bg-[#f0f9f1] px-4 sm:px-8 py-4 sm:py-6 text-green-800 text-sm sm:text-base uppercase border-r border-green-200 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-[#f0f9f1] px-4 sm:px-8 py-4 sm:py-6 text-green-800 text-sm sm:text-base uppercase border-r border-[#cbd5e1] sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Total Ingresos</td
                 >
                 {#each MESES as _, i}
@@ -196,7 +196,7 @@
               <tr class="bg-red-50/50">
                 <td
                   colspan="14"
-                  class="sticky left-0 z-10 bg-red-50 px-4 sm:px-8 py-2 text-[11px] sm:text-xs font-black text-red-700 uppercase tracking-widest border-r border-red-100 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-red-50 px-4 sm:px-8 py-2 text-[11px] sm:text-xs font-black text-red-700 uppercase tracking-widest border-r border-[#e2e8f0] sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Gastos</td
                 >
               </tr>
@@ -256,7 +256,7 @@
               {/each}
               <tr class="bg-red-100/30 font-black border-b border-red-200">
                 <td
-                  class="sticky left-0 z-10 bg-[#fee2e2] px-4 sm:px-8 py-4 sm:py-6 text-red-800 text-sm sm:text-base uppercase border-r border-red-200 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-[#fee2e2] px-4 sm:px-8 py-4 sm:py-6 text-red-800 text-sm sm:text-base uppercase border-r border-[#cbd5e1] sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Total Gastos</td
                 >
                 {#each MESES as _, i}

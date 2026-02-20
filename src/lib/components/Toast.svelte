@@ -23,7 +23,7 @@
 {#if show}
   <div
     transition:fly={{ y: 20, duration: 400, easing: backOut }}
-    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl text-white font-black shadow-2xl {colors[
+    class="fixed bottom-8 left-1/2 -translate-x-1/2 z-100 flex items-center gap-3 px-6 py-4 rounded-2xl text-white font-black shadow-2xl {colors[
       type
     ]}"
   >

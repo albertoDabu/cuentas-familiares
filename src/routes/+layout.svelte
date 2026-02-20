@@ -64,7 +64,7 @@
 
 <div class="min-h-screen bg-slate-50 flex flex-col font-sans">
   <!-- Top Navigation -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-10 w-full">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 w-full">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div
@@ -158,25 +158,4 @@
 </div>
 
 <style>
-  @keyframes fade-in-out {
-    0% {
-      opacity: 0;
-      transform: translateY(5px);
-    }
-    15% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    85% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-  }
-  .animate-fade-in-out {
-    animation: fade-in-out 2s forwards;
-  }
 </style>
