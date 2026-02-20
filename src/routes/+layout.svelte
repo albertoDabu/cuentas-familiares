@@ -5,8 +5,10 @@
   import { authState, authActions } from "$lib/auth.svelte.js";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import Modal from "$lib/components/Modal.svelte";
 
   let { children } = $props();
+  let showMobileWarning = $state(false);
 
   const navItems = [
     { href: "/", label: "MIS CUENTAS", icon: "📈" },
@@ -41,6 +43,12 @@
     await authActions.logout();
     goto("/login");
   }
+
+  onMount(() => {
+    if (window.innerWidth < 768) {
+      showMobileWarning = true;
+    }
+  });
 </script>
 
 <div class="min-h-screen bg-slate-50 flex flex-col font-sans">
@@ -53,43 +61,52 @@
         >
           🏠
         </div>
-        <h1 class="text-xl font-black text-slate-800 tracking-tight">
+        <h1
+          class="hidden md:block text-xl font-black text-slate-800 tracking-tight"
+        >
           CUENTAS FAMILIARES
         </h1>
       </div>
 
       {#if !authState.loading && authState.user && !authRoutes.includes($page.url.pathname)}
-        <nav class="flex gap-1">
+        <nav class="flex gap-0.5 sm:gap-1">
           {#each navItems as item}
             <a
               href={item.href}
-              class="px-4 py-2 rounded-xl text-sm font-bold transition-all {$page
+              class="px-2 sm:px-4 py-2 rounded-xl text-[10px] sm:text-sm font-bold transition-all {$page
                 .url.pathname === item.href
                 ? 'bg-indigo-50 text-indigo-700'
                 : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'}"
             >
-              <span class="mr-2">{item.icon}</span>
-              {item.label}
+              <span class="mr-1 sm:mr-2">{item.icon}</span>
+              <span class="hidden xs:inline">{item.label}</span>
+              <span class="inline xs:hidden">
+                {item.label === "MIS CUENTAS"
+                  ? "CUENTAS"
+                  : item.label === "AÑADIR INGRESO/GASTO"
+                    ? "AÑADIR"
+                    : "CATEGORÍAS"}
+              </span>
             </a>
           {/each}
         </nav>
 
-        <div class="flex items-center gap-8">
-          <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 sm:gap-8">
+          <div class="flex items-center gap-2 sm:gap-3">
             <span
-              class="text-[10px] font-black text-slate-400 uppercase tracking-widest"
+              class="hidden sm:inline text-[10px] font-black text-slate-400 uppercase tracking-widest"
               >{authState.user.email}</span
             >
             <button
               onclick={handleLogout}
-              class="w-10 h-10 flex items-center justify-center bg-slate-50 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-xl transition-all border border-slate-100"
+              class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-50 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-xl transition-all border border-slate-100"
               title="Cerrar Sesión"
             >
-              🚪
+              ➜]
             </button>
           </div>
 
-          <div class="w-12 flex justify-end">
+          <div class="w-4 sm:w-12 flex justify-end">
             {#if $feedback.saved}
               <div
                 class="flex items-center text-green-600 text-sm font-bold animate-fade-in-out"
@@ -114,6 +131,31 @@
       {@render children()}
     {/if}
   </main>
+
+  <!-- Mobile Warning Modal -->
+  <Modal
+    show={showMobileWarning}
+    title="Optimización de Pantalla"
+    onClose={() => (showMobileWarning = false)}
+  >
+    <div class="space-y-6">
+      <div class="flex flex-col items-center text-center gap-4">
+        <div class="text-5xl">💻</div>
+        <p class="text-slate-600 text-lg font-medium leading-relaxed">
+          Se recomienda usar esta aplicación desde un <span
+            class="text-indigo-600 font-bold">ordenador</span
+          > para mejorar la experiencia de uso y visualización de datos.
+        </p>
+      </div>
+
+      <button
+        onclick={() => (showMobileWarning = false)}
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-indigo-100 transition-all active:scale-95 uppercase tracking-widest text-xs"
+      >
+        Entendido
+      </button>
+    </div>
+  </Modal>
 </div>
 
 <style>
