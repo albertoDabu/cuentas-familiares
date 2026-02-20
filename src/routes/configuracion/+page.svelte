@@ -76,7 +76,9 @@
   <section class="flex-1 bg-slate-50 py-12">
     <div class="max-w-7xl mx-auto px-6 space-y-10 relative">
       <div>
-        <h2 class="text-4xl font-black text-slate-800 tracking-tight">
+        <h2
+          class="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight"
+        >
           Editar mis categorias
         </h2>
       </div>

@@ -55,7 +55,9 @@
   <section class="flex-1 bg-slate-50 py-12">
     <div class="max-w-7xl mx-auto px-6 space-y-10">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <h2 class="text-4xl font-black text-slate-800 tracking-tight">
+        <h2
+          class="text-2xl sm:text-4xl font-black text-slate-800 tracking-tight"
+        >
           Resumen de mis cuentas
         </h2>
         <div
@@ -90,7 +92,7 @@
                 class="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-widest bg-slate-50"
               >
                 <th
-                  class="px-4 sm:px-8 py-3 sm:py-4 border-b border-slate-100 min-w-[120px] sm:min-w-[200px]"
+                  class="sticky left-0 z-20 bg-slate-50 px-4 sm:px-8 py-3 sm:py-4 border-b border-slate-100 min-w-[120px] sm:min-w-[200px] shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Categoría</th
                 >
                 {#each MESES as mes}
@@ -110,7 +112,7 @@
               <tr class="bg-green-50/50">
                 <td
                   colspan="14"
-                  class="px-4 sm:px-8 py-2 text-[10px] sm:text-xs font-black text-green-700 uppercase tracking-widest"
+                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-2 text-[10px] sm:text-xs font-black text-green-700 uppercase tracking-widest shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Ingresos</td
                 >
               </tr>
@@ -119,7 +121,7 @@
                   class="hover:bg-green-50/30 border-b border-slate-50 transition-colors bg-white"
                 >
                   <td
-                    class="px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-xs sm:text-base"
+                    class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-xs sm:text-base shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                     >{cat.nombre}</td
                   >
                   {#each MESES as _, i}
@@ -144,7 +146,7 @@
                       class="bg-slate-50/30 border-b border-slate-50/50 text-xs"
                     >
                       <td
-                        class="px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-[10px] sm:text-xs"
+                        class="sticky left-0 z-10 bg-inherit px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-[10px] sm:text-xs shadow-[1px_0_3px_rgba(0,0,0,0.03)] sm:shadow-none"
                         >{sub.nombre}</td
                       >
                       {#each MESES as _, i}
@@ -170,7 +172,7 @@
               {/each}
               <tr class="bg-green-100/30 font-black border-b border-green-200">
                 <td
-                  class="px-4 sm:px-8 py-4 sm:py-6 text-green-800 text-xs sm:text-base uppercase"
+                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-4 sm:py-6 text-green-800 text-xs sm:text-base uppercase shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Total Ingresos</td
                 >
                 {#each MESES as _, i}
@@ -194,7 +196,7 @@
               <tr class="bg-red-50/50">
                 <td
                   colspan="14"
-                  class="px-4 sm:px-8 py-2 text-[10px] sm:text-xs font-black text-red-700 uppercase tracking-widest"
+                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-2 text-[10px] sm:text-xs font-black text-red-700 uppercase tracking-widest shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Gastos</td
                 >
               </tr>
@@ -203,7 +205,7 @@
                   class="hover:bg-red-50/30 border-b border-slate-50 transition-colors bg-white"
                 >
                   <td
-                    class="px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-xs sm:text-base"
+                    class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-xs sm:text-base shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                     >{cat.nombre}</td
                   >
                   {#each MESES as _, i}
@@ -228,7 +230,7 @@
                       class="bg-slate-50/30 border-b border-slate-50/50 text-xs"
                     >
                       <td
-                        class="px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-[10px] sm:text-xs"
+                        class="sticky left-0 z-10 bg-inherit px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-[10px] sm:text-xs shadow-[1px_0_3px_rgba(0,0,0,0.03)] sm:shadow-none"
                         >{sub.nombre}</td
                       >
                       {#each MESES as _, i}
@@ -254,7 +256,7 @@
               {/each}
               <tr class="bg-red-100/30 font-black border-b border-red-200">
                 <td
-                  class="px-4 sm:px-8 py-4 sm:py-6 text-red-800 text-xs sm:text-base uppercase"
+                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-4 sm:py-6 text-red-800 text-xs sm:text-base uppercase shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Total Gastos</td
                 >
                 {#each MESES as _, i}
@@ -277,7 +279,7 @@
               <!-- RESULTADO NETO -->
               <tr class="bg-indigo-600 text-white font-black">
                 <td
-                  class="px-4 sm:px-8 py-6 sm:py-8 text-sm sm:text-lg tracking-tight uppercase"
+                  class="sticky left-0 z-10 bg-indigo-600 px-4 sm:px-8 py-6 sm:py-8 text-sm sm:text-lg tracking-tight uppercase shadow-[2px_0_5px_rgba(0,0,0,0.1)] sm:shadow-none"
                   >Resultado Neto</td
                 >
                 {#each MESES as _, i}
