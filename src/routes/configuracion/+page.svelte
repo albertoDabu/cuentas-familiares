@@ -134,7 +134,7 @@
                         onclick={() => openAddModal("subcategoria", cat.id)}
                         class="text-xs font-bold bg-white text-slate-400 hover:text-indigo-600 px-2 py-1.5 rounded-lg border border-slate-200 transition-all hover:shadow-sm"
                       >
-                        + Sub
+                        + Añadir Subcategoría
                       </button>
                       <button
                         onclick={() =>

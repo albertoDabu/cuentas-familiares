@@ -48,7 +48,7 @@
           🏠
         </div>
         <h1 class="text-xl font-black text-slate-800 tracking-tight">
-          Presupuesto Familiar
+          CUENTAS FAMILIARES
         </h1>
       </div>
 
