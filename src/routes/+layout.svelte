@@ -11,9 +11,19 @@
   let showMobileWarning = $state(false);
 
   const navItems = [
-    { href: "/", label: "MIS CUENTAS", icon: "📈" },
-    { href: "/gestion", label: "AÑADIR INGRESO/GASTO", icon: "💲" },
-    { href: "/configuracion", label: "EDITAR CATEGORIAS", icon: "⚙️" },
+    { href: "/", label: "MIS CUENTAS", icon: "📈", mobile: "CUENTAS" },
+    {
+      href: "/gestion",
+      label: "AÑADIR INGRESOS Y GASTOS",
+      icon: "💲",
+      mobile: "AÑADIR",
+    },
+    {
+      href: "/configuracion",
+      label: "EDITAR CATEGORIAS",
+      icon: "⚙️",
+      mobile: "CATEGORIAS",
+    },
   ];
 
   const authRoutes = ["/login", "/register"];
@@ -79,13 +89,9 @@
                 : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'}"
             >
               <span class="mr-1 sm:mr-2">{item.icon}</span>
-              <span class="hidden xs:inline">{item.label}</span>
-              <span class="inline xs:hidden">
-                {item.label === "MIS CUENTAS"
-                  ? "CUENTAS"
-                  : item.label === "AÑADIR INGRESO/GASTO"
-                    ? "AÑADIR"
-                    : "CATEGORÍAS"}
+              <span class="hidden sm:inline">{item.label}</span>
+              <span class="inline sm:hidden">
+                {item.mobile}
               </span>
             </a>
           {/each}
