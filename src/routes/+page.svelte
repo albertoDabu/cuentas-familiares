@@ -92,7 +92,7 @@
                 class="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-widest bg-slate-50"
               >
                 <th
-                  class="sticky left-0 z-20 bg-slate-50 px-4 sm:px-8 py-3 sm:py-4 border-b border-slate-100 min-w-[120px] sm:min-w-[200px] shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-20 bg-slate-50 px-4 sm:px-8 py-3 sm:py-4 border-b border-r border-slate-100 sm:border-r-0 min-w-[120px] sm:min-w-[200px] shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Categoría</th
                 >
                 {#each MESES as mes}
@@ -112,7 +112,7 @@
               <tr class="bg-green-50/50">
                 <td
                   colspan="14"
-                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-2 text-[10px] sm:text-xs font-black text-green-700 uppercase tracking-widest shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-green-50 px-4 sm:px-8 py-2 text-[11px] sm:text-xs font-black text-green-700 uppercase tracking-widest border-r border-green-100 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Ingresos</td
                 >
               </tr>
@@ -121,18 +121,18 @@
                   class="hover:bg-green-50/30 border-b border-slate-50 transition-colors bg-white"
                 >
                   <td
-                    class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-xs sm:text-base shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                    class="sticky left-0 z-10 bg-white px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-sm sm:text-base border-r border-slate-100 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                     >{cat.nombre}</td
                   >
                   {#each MESES as _, i}
                     <td
-                      class="px-2 sm:px-4 py-3 sm:py-5 text-center text-green-600 text-[10px] sm:text-sm"
+                      class="px-2 sm:px-4 py-3 sm:py-5 text-center text-green-600 text-[11px] sm:text-sm"
                     >
                       {getSumCategoriaMes(cat.id, i).toFixed(0) || "-"}
                     </td>
                   {/each}
                   <td
-                    class="px-4 sm:px-8 py-3 sm:py-5 text-right font-black text-green-800 text-xs sm:text-sm"
+                    class="px-4 sm:px-8 py-3 sm:py-5 text-right font-black text-green-800 text-[11px] sm:text-sm"
                   >
                     {MESES.reduce(
                       (acc, _, i) => acc + getSumCategoriaMes(cat.id, i),
@@ -146,12 +146,12 @@
                       class="bg-slate-50/30 border-b border-slate-50/50 text-xs"
                     >
                       <td
-                        class="sticky left-0 z-10 bg-inherit px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-[10px] sm:text-xs shadow-[1px_0_3px_rgba(0,0,0,0.03)] sm:shadow-none"
+                        class="sticky left-0 z-10 bg-slate-50 px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-xs border-r border-slate-100 sm:border-r-0 shadow-[1px_0_3px_rgba(0,0,0,0.03)] sm:shadow-none"
                         >{sub.nombre}</td
                       >
                       {#each MESES as _, i}
                         <td
-                          class="px-2 sm:px-4 py-2 sm:py-3 text-center text-slate-400 font-medium text-[9px] sm:text-xs"
+                          class="px-2 sm:px-4 py-2 sm:py-3 text-center text-slate-400 font-medium text-[10px] sm:text-xs"
                         >
                           {getSumSubcategoriaMes(sub.id, i)
                             ? getSumSubcategoriaMes(sub.id, i).toFixed(0)
@@ -159,7 +159,7 @@
                         </td>
                       {/each}
                       <td
-                        class="px-4 sm:px-8 py-2 sm:py-3 text-right text-slate-500 font-bold text-[9px] sm:text-xs"
+                        class="px-4 sm:px-8 py-2 sm:py-3 text-right text-slate-500 font-bold text-[10px] sm:text-xs"
                       >
                         {MESES.reduce(
                           (acc, _, i) => acc + getSumSubcategoriaMes(sub.id, i),
@@ -172,18 +172,18 @@
               {/each}
               <tr class="bg-green-100/30 font-black border-b border-green-200">
                 <td
-                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-4 sm:py-6 text-green-800 text-xs sm:text-base uppercase shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-[#f0f9f1] px-4 sm:px-8 py-4 sm:py-6 text-green-800 text-sm sm:text-base uppercase border-r border-green-200 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Total Ingresos</td
                 >
                 {#each MESES as _, i}
                   <td
-                    class="px-2 sm:px-4 py-4 sm:py-6 text-center text-green-800 text-sm sm:text-lg"
+                    class="px-2 sm:px-4 py-4 sm:py-6 text-center text-green-800 text-base sm:text-lg"
                   >
                     {getSumGrupoMes("g1", i).toFixed(0)}€
                   </td>
                 {/each}
                 <td
-                  class="px-4 sm:px-8 py-4 sm:py-6 text-right text-green-900 text-lg sm:text-2xl"
+                  class="px-4 sm:px-8 py-4 sm:py-6 text-right text-green-900 text-xl sm:text-2xl"
                 >
                   {MESES.reduce(
                     (acc, _, i) => acc + getSumGrupoMes("g1", i),
@@ -196,7 +196,7 @@
               <tr class="bg-red-50/50">
                 <td
                   colspan="14"
-                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-2 text-[10px] sm:text-xs font-black text-red-700 uppercase tracking-widest shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-red-50 px-4 sm:px-8 py-2 text-[11px] sm:text-xs font-black text-red-700 uppercase tracking-widest border-r border-red-100 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Gastos</td
                 >
               </tr>
@@ -205,18 +205,18 @@
                   class="hover:bg-red-50/30 border-b border-slate-50 transition-colors bg-white"
                 >
                   <td
-                    class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-xs sm:text-base shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                    class="sticky left-0 z-10 bg-white px-4 sm:px-8 py-3 sm:py-5 font-bold text-slate-800 text-sm sm:text-base border-r border-slate-100 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                     >{cat.nombre}</td
                   >
                   {#each MESES as _, i}
                     <td
-                      class="px-2 sm:px-4 py-3 sm:py-5 text-center text-red-500 text-[10px] sm:text-sm"
+                      class="px-2 sm:px-4 py-3 sm:py-5 text-center text-red-500 text-[11px] sm:text-sm"
                     >
                       {getSumCategoriaMes(cat.id, i).toFixed(0) || "-"}
                     </td>
                   {/each}
                   <td
-                    class="px-4 sm:px-8 py-3 sm:py-5 text-right font-black text-red-800 text-xs sm:text-sm"
+                    class="px-4 sm:px-8 py-3 sm:py-5 text-right font-black text-red-800 text-[11px] sm:text-sm"
                   >
                     {MESES.reduce(
                       (acc, _, i) => acc + getSumCategoriaMes(cat.id, i),
@@ -230,12 +230,12 @@
                       class="bg-slate-50/30 border-b border-slate-50/50 text-xs"
                     >
                       <td
-                        class="sticky left-0 z-10 bg-inherit px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-[10px] sm:text-xs shadow-[1px_0_3px_rgba(0,0,0,0.03)] sm:shadow-none"
+                        class="sticky left-0 z-10 bg-slate-50 px-6 sm:px-12 py-2 sm:py-3 text-slate-500 font-medium italic text-xs border-r border-slate-100 sm:border-r-0 shadow-[1px_0_3px_rgba(0,0,0,0.03)] sm:shadow-none"
                         >{sub.nombre}</td
                       >
                       {#each MESES as _, i}
                         <td
-                          class="px-2 sm:px-4 py-2 sm:py-3 text-center text-slate-400 font-medium text-[9px] sm:text-xs"
+                          class="px-2 sm:px-4 py-2 sm:py-3 text-center text-slate-400 font-medium text-[10px] sm:text-xs"
                         >
                           {getSumSubcategoriaMes(sub.id, i)
                             ? getSumSubcategoriaMes(sub.id, i).toFixed(0)
@@ -243,7 +243,7 @@
                         </td>
                       {/each}
                       <td
-                        class="px-4 sm:px-8 py-2 sm:py-3 text-right text-slate-500 font-bold text-[9px] sm:text-xs"
+                        class="px-4 sm:px-8 py-2 sm:py-3 text-right text-slate-500 font-bold text-[10px] sm:text-xs"
                       >
                         {MESES.reduce(
                           (acc, _, i) => acc + getSumSubcategoriaMes(sub.id, i),
@@ -256,18 +256,18 @@
               {/each}
               <tr class="bg-red-100/30 font-black border-b border-red-200">
                 <td
-                  class="sticky left-0 z-10 bg-inherit px-4 sm:px-8 py-4 sm:py-6 text-red-800 text-xs sm:text-base uppercase shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-[#fee2e2] px-4 sm:px-8 py-4 sm:py-6 text-red-800 text-sm sm:text-base uppercase border-r border-red-200 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none"
                   >Total Gastos</td
                 >
                 {#each MESES as _, i}
                   <td
-                    class="px-2 sm:px-4 py-4 sm:py-6 text-center text-red-800 text-sm sm:text-lg"
+                    class="px-2 sm:px-4 py-4 sm:py-6 text-center text-red-800 text-base sm:text-lg"
                   >
                     {getSumGrupoMes("g2", i).toFixed(0)}€
                   </td>
                 {/each}
                 <td
-                  class="px-4 sm:px-8 py-4 sm:py-6 text-right text-red-900 text-lg sm:text-2xl"
+                  class="px-4 sm:px-8 py-4 sm:py-6 text-right text-red-900 text-xl sm:text-2xl"
                 >
                   {MESES.reduce(
                     (acc, _, i) => acc + getSumGrupoMes("g2", i),
@@ -279,18 +279,18 @@
               <!-- RESULTADO NETO -->
               <tr class="bg-indigo-600 text-white font-black">
                 <td
-                  class="sticky left-0 z-10 bg-indigo-600 px-4 sm:px-8 py-6 sm:py-8 text-sm sm:text-lg tracking-tight uppercase shadow-[2px_0_5px_rgba(0,0,0,0.1)] sm:shadow-none"
+                  class="sticky left-0 z-10 bg-indigo-600 px-4 sm:px-8 py-6 sm:py-8 text-base sm:text-lg tracking-tight uppercase border-r border-indigo-500 sm:border-r-0 shadow-[2px_0_5px_rgba(0,0,0,0.1)] sm:shadow-none"
                   >Resultado Neto</td
                 >
                 {#each MESES as _, i}
                   <td
-                    class="px-2 sm:px-4 py-6 sm:py-8 text-center text-base sm:text-xl"
+                    class="px-2 sm:px-4 py-6 sm:py-8 text-center text-lg sm:text-xl"
                   >
                     {getNetoMes(i).toFixed(0)}€
                   </td>
                 {/each}
                 <td
-                  class="px-4 sm:px-8 py-6 sm:py-8 text-right text-xl sm:text-3xl"
+                  class="px-4 sm:px-8 py-6 sm:py-8 text-right text-2xl sm:text-3xl"
                 >
                   {MESES.reduce((acc, _, i) => acc + getNetoMes(i), 0).toFixed(
                     2,
