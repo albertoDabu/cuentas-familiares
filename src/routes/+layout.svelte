@@ -9,8 +9,8 @@
   let { children } = $props();
 
   const navItems = [
-    { href: "/", label: "MIS CUENTAS", icon: "📊" },
-    { href: "/gestion", label: "ANOTAR INGRESO/GASTO", icon: "📅" },
+    { href: "/", label: "MIS CUENTAS", icon: "📈" },
+    { href: "/gestion", label: "AÑADIR INGRESO/GASTO", icon: "💲" },
     { href: "/configuracion", label: "EDITAR CATEGORIAS", icon: "⚙️" },
   ];
 

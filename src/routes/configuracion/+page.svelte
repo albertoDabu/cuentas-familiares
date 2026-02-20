@@ -77,7 +77,7 @@
     <div class="max-w-7xl mx-auto px-6 space-y-10 relative">
       <div>
         <h2 class="text-4xl font-black text-slate-800 tracking-tight">
-          Configuración de Cuentas
+          Editar mis categorias
         </h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">

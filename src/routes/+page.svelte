@@ -56,7 +56,7 @@
     <div class="max-w-7xl mx-auto px-6 space-y-10">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
         <h2 class="text-4xl font-black text-slate-800 tracking-tight">
-          Balance General Anual
+          Resumen de mis cuentas
         </h2>
         <div
           class="flex items-center gap-4 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm"
