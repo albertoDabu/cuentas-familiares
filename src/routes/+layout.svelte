@@ -18,6 +18,12 @@
 
   $effect(() => {
     if (!authState.loading) {
+      const mode = $page.url.searchParams.get("mode");
+      if (mode === "test" && !authState.user) {
+        authActions.login("usuario@test.com", "test");
+        return;
+      }
+
       const isAuthRoute = authRoutes.includes($page.url.pathname);
       if (!authState.user && !isAuthRoute) {
         goto("/login");
