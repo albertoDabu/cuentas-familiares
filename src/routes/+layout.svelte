@@ -9,9 +9,9 @@
   let { children } = $props();
 
   const navItems = [
-    { href: "/", label: "Balance General", icon: "📊" },
-    { href: "/gestion", label: "Gestión Mensual", icon: "📅" },
-    { href: "/configuracion", label: "Configuración", icon: "⚙️" },
+    { href: "/", label: "MIS CUENTAS", icon: "📊" },
+    { href: "/gestion", label: "ANOTAR INGRESO/GASTO", icon: "📅" },
+    { href: "/configuracion", label: "EDITAR CATEGORIAS", icon: "⚙️" },
   ];
 
   const authRoutes = ["/login", "/register"];
