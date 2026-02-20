@@ -56,14 +56,18 @@ async function refreshData() {
   });
 }
 
-// Feedback Store
-export const feedback = writable({ saved: false });
+// Feedback Store (Toast)
+export const feedback = writable({ show: false, message: '', type: 'success' });
 
-export function triggerSavedFeedback() {
-  feedback.set({ saved: true });
+/**
+ * @param {string} message
+ * @param {'success' | 'error' | 'info'} type
+ */
+export function showToast(message, type = 'success') {
+  feedback.set({ show: true, message, type });
   setTimeout(() => {
-    feedback.set({ saved: false });
-  }, 2000);
+    feedback.set({ show: false, message: '', type: 'success' });
+  }, 3000);
 }
 
 
@@ -84,7 +88,9 @@ export const dbActions = {
     if (!error) {
       const newCat = { id: data[0].id, nombre: data[0].nombre, grupoId: data[0].grupo_id };
       dbStore.update(db => ({ ...db, categorias: [...db.categorias, newCat] }));
-      triggerSavedFeedback();
+      showToast("Categoría añadida con éxito", "success");
+    } else {
+      showToast("Error al añadir categoría: " + error.message, "error");
     }
   },
 
@@ -99,7 +105,9 @@ export const dbActions = {
         ...db,
         categorias: db.categorias.map(c => c.id === id ? { ...c, nombre } : c)
       }));
-      triggerSavedFeedback();
+      showToast("Categoría actualizada", "success");
+    } else {
+      showToast("Error al actualizar categoría", "error");
     }
   },
 
@@ -115,7 +123,9 @@ export const dbActions = {
           registros: db.registros.filter(r => !subIdsForCat.includes(r.subcategoriaId))
         };
       });
-      triggerSavedFeedback();
+      showToast("Categoría eliminada", "success");
+    } else {
+      showToast("Error al eliminar categoría", "error");
     }
   },
 
@@ -128,7 +138,9 @@ export const dbActions = {
     if (!error) {
       const newSub = { id: data[0].id, nombre: data[0].nombre, categoriaId: data[0].categoria_id };
       dbStore.update(db => ({ ...db, subcategorias: [...db.subcategorias, newSub] }));
-      triggerSavedFeedback();
+      showToast("Subcategoría añadida", "success");
+    } else {
+      showToast("Error al añadir subcategoría", "error");
     }
   },
 
@@ -143,7 +155,9 @@ export const dbActions = {
         ...db,
         subcategorias: db.subcategorias.map(s => s.id === id ? { ...s, nombre } : s)
       }));
-      triggerSavedFeedback();
+      showToast("Subcategoría actualizada", "success");
+    } else {
+      showToast("Error al actualizar subcategoría", "error");
     }
   },
 
@@ -155,7 +169,9 @@ export const dbActions = {
         subcategorias: db.subcategorias.filter(s => s.id !== id),
         registros: db.registros.filter(r => r.subcategoriaId !== id)
       }));
-      triggerSavedFeedback();
+      showToast("Subcategoría eliminada", "success");
+    } else {
+      showToast("Error al eliminar subcategoría", "error");
     }
   },
 
@@ -184,7 +200,9 @@ export const dbActions = {
         comentarios: r.comentarios
       };
       dbStore.update(db => ({ ...db, registros: [...db.registros, newReg] }));
-      triggerSavedFeedback();
+      showToast("Registro guardado con éxito", "success");
+    } else {
+      showToast("Error al guardar registro", "error");
     }
   },
 
@@ -208,7 +226,9 @@ export const dbActions = {
           ...r, mes, subcategoriaId, concepto, importe, fecha, comentarios 
         } : r)
       }));
-      triggerSavedFeedback();
+      showToast("Registro actualizado", "success");
+    } else {
+      showToast("Error al actualizar registro", "error");
     }
   },
 
@@ -219,7 +239,9 @@ export const dbActions = {
         ...db,
         registros: db.registros.filter(r => r.id !== id)
       }));
-      triggerSavedFeedback();
+      showToast("Registro eliminado", "success");
+    } else {
+      showToast("Error al eliminar registro", "error");
     }
   },
 

@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import Modal from "$lib/components/Modal.svelte";
+  import Toast from "$lib/components/Toast.svelte";
 
   let { children } = $props();
   let showMobileWarning = $state(false);
@@ -14,9 +15,9 @@
     { href: "/", label: "MIS CUENTAS", icon: "📈", mobile: "CUENTAS" },
     {
       href: "/gestion",
-      label: "AÑADIR INGRESOS Y GASTOS",
+      label: "ANOTAR INGRESOS Y GASTOS",
       icon: "💲",
-      mobile: "AÑADIR",
+      mobile: "ANOTAR",
     },
     {
       href: "/configuracion",
@@ -111,16 +112,6 @@
               ➜]
             </button>
           </div>
-
-          <div class="w-4 sm:w-12 flex justify-end">
-            {#if $feedback.saved}
-              <div
-                class="flex items-center text-green-600 text-sm font-bold animate-fade-in-out"
-              >
-                <span class="mr-1">✓</span>
-              </div>
-            {/if}
-          </div>
         </div>
       {/if}
     </div>
@@ -162,6 +153,8 @@
       </button>
     </div>
   </Modal>
+
+  <Toast />
 </div>
 
 <style>
